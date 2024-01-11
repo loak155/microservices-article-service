@@ -35,11 +35,11 @@ func (uu *articleUsecase) CreateArticle(article domain.Article) (domain.Article,
 }
 
 func (uu *articleUsecase) GetArticle(id int) (domain.Article, error) {
-	storedUser := domain.Article{}
-	if err := uu.ar.GetArticle(&storedUser, id); err != nil {
+	storedArticle := domain.Article{}
+	if err := uu.ar.GetArticle(&storedArticle, id); err != nil {
 		return domain.Article{}, err
 	}
-	return storedUser, nil
+	return storedArticle, nil
 }
 
 func (uu *articleUsecase) ListArticles() ([]domain.Article, error) {

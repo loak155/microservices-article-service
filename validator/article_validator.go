@@ -13,7 +13,7 @@ type IArticleValidator interface {
 
 type articleValidator struct{}
 
-func NewUserValidator() IArticleValidator {
+func NewArticleValidator() IArticleValidator {
 	return &articleValidator{}
 }
 

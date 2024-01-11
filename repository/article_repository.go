@@ -18,7 +18,7 @@ type articleRepository struct {
 	db *gorm.DB
 }
 
-func NewUserRepository(db *gorm.DB) IArticleRepository {
+func NewArticleRepository(db *gorm.DB) IArticleRepository {
 	return &articleRepository{db}
 }
 
