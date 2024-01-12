@@ -35,7 +35,7 @@ func (s *articleGRPCServer) CreateArticle(ctx context.Context, req *pb.CreateArt
 		Id:            int32(articleRes.ID),
 		Title:         articleRes.Title,
 		Url:           articleRes.Url,
-		BookmarkCount: articleRes.BookmarkCount,
+		BookmarkCount: int32(article.BookmarkCount),
 		CreatedAt:     &timestamppb.Timestamp{Seconds: int64(articleRes.CreatedAt.Unix()), Nanos: int32(articleRes.CreatedAt.Nanosecond())},
 		UpdatedAt:     &timestamppb.Timestamp{Seconds: int64(articleRes.UpdatedAt.Unix()), Nanos: int32(articleRes.UpdatedAt.Nanosecond())},
 	}
@@ -53,7 +53,7 @@ func (s *articleGRPCServer) GetArticle(ctx context.Context, req *pb.GetArticleRe
 		Id:            int32(articleRes.ID),
 		Title:         articleRes.Title,
 		Url:           articleRes.Url,
-		BookmarkCount: articleRes.BookmarkCount,
+		BookmarkCount: int32(articleRes.BookmarkCount),
 		CreatedAt:     &timestamppb.Timestamp{Seconds: int64(articleRes.CreatedAt.Unix()), Nanos: int32(articleRes.CreatedAt.Nanosecond())},
 		UpdatedAt:     &timestamppb.Timestamp{Seconds: int64(articleRes.UpdatedAt.Unix()), Nanos: int32(articleRes.UpdatedAt.Nanosecond())},
 	}
@@ -72,7 +72,7 @@ func (s *articleGRPCServer) ListArticles(ctx context.Context, req *pb.ListArticl
 			Id:            int32(article.ID),
 			Title:         article.Title,
 			Url:           article.Url,
-			BookmarkCount: article.BookmarkCount,
+			BookmarkCount: int32(article.BookmarkCount),
 			CreatedAt:     &timestamppb.Timestamp{Seconds: int64(article.CreatedAt.Unix()), Nanos: int32(article.CreatedAt.Nanosecond())},
 			UpdatedAt:     &timestamppb.Timestamp{Seconds: int64(article.UpdatedAt.Unix()), Nanos: int32(article.UpdatedAt.Nanosecond())},
 		})
@@ -84,12 +84,12 @@ func (s *articleGRPCServer) ListArticles(ctx context.Context, req *pb.ListArticl
 func (s *articleGRPCServer) UpdateArticle(ctx context.Context, req *pb.UpdateArticleRequest) (*pb.UpdateArticleResponse, error) {
 	res := pb.UpdateArticleResponse{}
 	article := domain.Article{
-		Id:            int32(article.ID),
-		Title:         article.Title,
-		Url:           article.Url,
-		BookmarkCount: article.BookmarkCount,
-		CreatedAt:     &timestamppb.Timestamp{Seconds: int64(article.CreatedAt.Unix()), Nanos: int32(article.CreatedAt.Nanosecond())},
-		UpdatedAt:     &timestamppb.Timestamp{Seconds: int64(article.UpdatedAt.Unix()), Nanos: int32(article.UpdatedAt.Nanosecond())},
+		ID:            uint(req.Article.Id),
+		Title:         req.Article.Title,
+		Url:           req.Article.Url,
+		BookmarkCount: uint(req.Article.BookmarkCount),
+		CreatedAt:     req.Article.CreatedAt.AsTime(),
+		UpdatedAt:     req.Article.UpdatedAt.AsTime(),
 	}
 	articleRes, err := s.au.UpdateArticle(article)
 	if err != nil {

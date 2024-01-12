@@ -10,11 +10,11 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/loak155/microservices/services/article-service/db"
-	"github.com/loak155/microservices/services/article-service/repository"
-	"github.com/loak155/microservices/services/article-service/router"
-	"github.com/loak155/microservices/services/article-service/usecase"
-	"github.com/loak155/microservices/services/article-service/validator"
+	"github.com/loak155/microservices-article-service/db"
+	"github.com/loak155/microservices-article-service/repository"
+	"github.com/loak155/microservices-article-service/router"
+	"github.com/loak155/microservices-article-service/usecase"
+	"github.com/loak155/microservices-article-service/validator"
 
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"

@@ -55,9 +55,10 @@ func (uu *articleUsecase) UpdateArticle(article domain.Article) (bool, error) {
 		return false, err
 	}
 	updatedArticle := domain.Article{
-		ID:    article.ID,
-		Title: article.Title,
-		Url:   article.Url,
+		ID:            article.ID,
+		Title:         article.Title,
+		Url:           article.Url,
+		BookmarkCount: article.BookmarkCount,
 	}
 	if err := uu.ar.UpdateArticle(&updatedArticle); err != nil {
 		return false, err
